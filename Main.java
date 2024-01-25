@@ -1,5 +1,5 @@
 //OFEK CASPI - 208895367 Omri argaman - 314772351
-//https://github.com/omriarg1/XO
+//https://github.com/omriarg1/Targil2
 package XO2;
 import java.util.Scanner;
 public class Main {
