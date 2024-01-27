@@ -1,6 +1,7 @@
 //OFEK CASPI - 208895367 Omri argaman - 314772351
 package XO2;
 import java.awt.Point;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -29,21 +30,25 @@ public class UserPlayer extends Player implements Runnable {
 				  }
 				  else {
 					  synchronized(UserGame) {//critical code
-						
 				  Scanner s = new Scanner(System.in);
 				  System.out.println("Your turn");
 				  UserGame.printBoard();
-				  System.out.println("Please the number of the row u want to Fill: ");
-				  int row=s.nextInt();
-				  System.out.println("Please the number of the Column u want to Fill: ");
-				  int col=s.nextInt();
+				  int row=-1,col=-1;
 				  while(!MakeMove(row,col))
-				  {
-					  System.out.println("Cell not empty please or wrong cell entered please Re enter: ");
-					  System.out.println("Please the number of the row u want to Fill: ");
-					  row=s.nextInt();
-					  System.out.println("Please the number of the Column u want to Fill: ");
-					  col=s.nextInt();
+				  {  
+					    try {
+						  System.out.println("Please the number of the row u want to Fill: ");
+						  row=s.nextInt();
+						  System.out.println("Please the number of the Column u want to Fill: ");
+						  col=s.nextInt();	
+						  if(!isFree(row,col))
+							  System.out.println("Cell not empty Please re enter");
+					    }
+					    catch(InputMismatchException e) {
+					    	System.out.println("Wrong cell entered cell must be a number");
+					    	col=row=-1;
+					    	s.nextLine();	
+					    	}
 				  }
 				  UserGame.printBoard();
 			      UserGame.incturnCounter();
